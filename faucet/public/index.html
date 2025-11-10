@@ -22,7 +22,7 @@
         }
         .main-container {
             width: 100%;
-            max-width: 960px; /* Increased max-width for horizontal layout */
+            max-width: 960px; 
         }
         .container {
             background: white;
@@ -31,7 +31,7 @@
             box-shadow: 0 8px 30px rgba(0,0,0,0.08);
             text-align: center;
             margin-bottom: 24px;
-            max-width: 480px; /* Keep claim card centered and not too wide */
+            max-width: 480px; 
             margin-left: auto;
             margin-right: auto;
         }
@@ -78,7 +78,6 @@
             word-wrap: break-word;
         }
 
-        /* --- NEW HORIZONTAL LAYOUT CSS --- */
         .setup-title {
             text-align: center;
             margin-top: 40px;
@@ -96,13 +95,12 @@
             border-radius: 12px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.08);
             text-align: left;
-            flex: 1; /* This makes the 3 cards share space equally */
-            min-width: 250px; /* Prevents cards from getting too small */
+            flex: 1; 
+            min-width: 250px; 
             margin-bottom: 0;
             padding-bottom: 0;
             border-bottom: none;
         }
-        /* --- END NEW CSS --- */
 
         .step h3 {
             margin: 0 0 15px 0;
@@ -167,10 +165,9 @@
             flex-shrink: 0;
         }
         
-        /* --- Responsive fix for small screens --- */
         @media (max-width: 768px) {
             .setup-guide-container {
-                flex-direction: column; /* Stack cards vertically on mobile */
+                flex-direction: column; 
             }
         }
     </style>
@@ -222,8 +219,7 @@
     <script src="script.js"></script>
 
     <script>
-        // --- THIS SCRIPT IS NOW FIXED ---
-        // It tries to SWITCH first, and only ADD if the network is missing.
+        // Add Sepolia Network to MetaMask
         const sepoliaChainId = '0xaa36a7'; // Sepolia ChainID in hex
 
         document.getElementById('addNetworkButton').addEventListener('click', async () => {

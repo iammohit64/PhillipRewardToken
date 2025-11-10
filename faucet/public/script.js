@@ -36,7 +36,7 @@ document.getElementById('claimButton').addEventListener('click', async () => {
         if (response.ok) {
             messageDiv.style.color = 'green';
             
-            // --- UPDATED to Sepolia Etherscan ---
+            // --- Sepolia Etherscan ---
             const explorerUrl = `https://sepolia.etherscan.io/tx/${data.txHash}`;
             
             messageDiv.innerHTML = `Success! <a href="${explorerUrl}" target="_blank" rel="noopener noreferrer">View Transaction</a>`;

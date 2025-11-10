@@ -1,4 +1,4 @@
-// server.js (Final Production Version with Gas Price Fix)
+// server.js 
 require('dotenv').config();
 const express = require('express');
 const { ethers } = require('ethers');
@@ -39,7 +39,6 @@ app.post('/claim', async (req, res) => {
 
         const amountToSend = ethers.parseUnits(amount, 18);
 
-        // --- NEW LINES TO FIX GAS PRICE ---
         // 1. Fetch the current recommended gas price from the network.
         const feeData = await provider.getFeeData();
         
@@ -47,7 +46,6 @@ app.post('/claim', async (req, res) => {
         const tx = await tokenContract.transfer(address, amountToSend, {
             gasPrice: feeData.gasPrice 
         });
-        // --- END OF NEW LINES ---
 
         console.log(`Transaction sent. Hash: ${tx.hash}`);
 
@@ -65,7 +63,7 @@ app.post('/claim', async (req, res) => {
 // Export the app for Vercel
 module.exports = app;
 
-// --- ADD THIS BLOCK TO RUN IT LOCALLY ---
+// --- BLOCK TO RUN IT LOCALLY ---
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

@@ -11,16 +11,14 @@ import { parseEther, formatEther } from 'viem';
 
 import RewardTokenABI from './abi/RewardToken.json';
 
-// --- !! IMPORTANT !! ---
-// I have added your deployed contract address here.
+// Contract address
 const contractAddress = '0x1e9f2F91E0673E3313C68b49a2262814C7d8921e';
-// -------------------------
 
 // --- Etherscan URL (Sepolia) ---
 const ETHERSCAN_URL = 'https://sepolia.etherscan.io';
 
 
-// 1. Wallet Connection Component (--- UI FIX ADDED ---)
+// 1. Wallet Connection Component
 function ConnectWallet() {
   const { connectors, connect } = useConnect();
   const { disconnect } = useDisconnect();
@@ -50,7 +48,7 @@ function ConnectWallet() {
   );
 }
 
-// 2. Token Balance Component (--- UI FIX ADDED ---)
+// 2. Token Balance Component
 function TokenInfo() {
   const { address, isConnected } = useAccount();
 
@@ -75,7 +73,7 @@ function TokenInfo() {
   });
 
   return (
-    // This 'info-card' class fixes the spacing
+    
     <div className="card info-card"> 
       <h3>2. Token Info</h3>
       <p>Name: <strong>{tokenName?.toString()}</strong></p>
@@ -89,7 +87,7 @@ function TokenInfo() {
   );
 }
 
-// 3. Add Token to Wallet Component (This will work now)
+// 3. Add Token to Wallet Component
 function AddTokenToWallet() {
   const [message, setMessage] = useState('');
 
@@ -105,7 +103,7 @@ function AddTokenToWallet() {
         params: {
           type: 'ERC20',
           options: {
-            address: contractAddress, // This now uses the correct address
+            address: contractAddress, 
             symbol: 'PRT', 
             decimals: 18,
           },
@@ -133,7 +131,7 @@ function AddTokenToWallet() {
   );
 }
 
-// --- NEW 4. Faucet Link Card ---
+// 4. Faucet Link Card
 function FaucetCard() {
   return (
     <div className="card">
@@ -283,7 +281,7 @@ function TransferTokens() {
 }
 
 
-// --- Main App (Updated with new card) ---
+// --- Main App ---
 function App() {
   const { isConnected } = useAccount();
 
@@ -298,7 +296,7 @@ function App() {
           <>
             <TokenInfo />
             <AddTokenToWallet />
-            <FaucetCard /> {/* <-- NEW CARD ADDED */}
+            <FaucetCard /> 
             <RewardMe />
             <TransferTokens />
           </>

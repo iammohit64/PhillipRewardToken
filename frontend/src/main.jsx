@@ -5,18 +5,18 @@ import './index.css';
 
 // 1. Import wagmi components
 import { WagmiProvider, createConfig, http } from 'wagmi';
-import { sepolia } from 'wagmi/chains'; // <-- CHANGED from polygonAmoy
+import { sepolia } from 'wagmi/chains'; 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { metaMask } from 'wagmi/connectors'
 
 // 2. Create wagmi config
 const config = createConfig({
-  chains: [sepolia], // <-- CHANGED
+  chains: [sepolia], 
   connectors: [
     metaMask(),
   ],
   transports: {
-    [sepolia.id]: http(), // <-- CHANGED
+    [sepolia.id]: http(), 
   },
 });
 
