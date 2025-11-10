@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claim Your PRT Tokens!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f7f9;
+            margin: 0;
+            padding: 40px 20px;
+            color: #333;
+            box-sizing: border-box;
+        }
+        .main-container {
+            width: 100%;
+            max-width: 960px; /* Increased max-width for horizontal layout */
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            margin-bottom: 24px;
+            max-width: 480px; /* Keep claim card centered and not too wide */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+            min-height: 20px;
+            word-wrap: break-word;
+        }
+
+        /* --- NEW HORIZONTAL LAYOUT CSS --- */
+        .setup-title {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 30px;
+        }
+        .setup-guide-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .step {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            text-align: left;
+            flex: 1; /* This makes the 3 cards share space equally */
+            min-width: 250px; /* Prevents cards from getting too small */
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        /* --- END NEW CSS --- */
+
+        .step h3 {
+            margin: 0 0 15px 0;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .step p {
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 0 0 15px 0;
+            color: #555;
+        }
+        .details {
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        .details strong {
+            color: #333;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .action-button {
+            background-color: #28a745;
+            font-size: 14px;
+            padding: 10px 15px;
+            margin-top: 10px;
+            width: auto;
+            display: inline-block;
+        }
+        .action-button:hover {
+            background-color: #218838;
+        }
+        .address-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+        #tokenAddress {
+            font-family: monospace;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-right: 10px;
+        }
+        .copy-button {
+            background-color: #6c757d;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-family: 'Inter', sans-serif;
+            border: none;
+            color: white;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        
+        /* --- Responsive fix for small screens --- */
+        @media (max-width: 768px) {
+            .setup-guide-container {
+                flex-direction: column; /* Stack cards vertically on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+
+        <div class="container">
+            <h1>Claim PRT Tokens</h1>
+            <p>Enter your wallet address and the amount you wish to claim.</p>
+            <input type="text" id="walletAddress" placeholder="Enter your wallet address (0x...)">
+            <input type="number" id="tokenAmount" placeholder="Amount (min 1, max 1000)">
+            <button id="claimButton">Claim Tokens</button>
+            <div id="message"></div>
+        </div>
+
+        <h2 class="setup-title">3-Step Setup Guide</h2>
+        
+        <div class="setup-guide-container">
+            <div class="step">
+                <h3>Step 1: Connect to Sepolia</h3>
+                <p>Ensure your wallet is connected to the correct test network.</p>
+                <button class="action-button" id="addNetworkButton">Switch to Sepolia</button>
+            </div>
+
+            <div class="step">
+                <h3>Step 2: Get Gas Money (Test ETH)</h3>
+                <p>You'll need a small amount of test ETH to pay for network fees. You can get some for free from a faucet.</p>
+                <a href="https://sepoliafaucet.com/" target="_blank" rel="noopener noreferrer">
+                    <button class="action-button">Go to ETH Faucet</button>
+                </a>
+            </div>
+
+            <div class="step">
+                <h3>Step 3: Add PRT Token to Wallet</h3>
+                <p>After claiming, the PRT token might not appear automatically. Use the button below or import it manually.</p>
+                <button class="action-button" id="addTokenButton">Add PRT to Wallet</button>
+                <div class="details">
+                    <strong>Token Address:</strong>
+                    <div class="address-container">
+                        <span id="tokenAddress">0x1e9f2F91E0673E3313C68b49a2262814C7d8921e</span>
+                        <button class="copy-button" id="copyButton">Copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <script>
+        // --- THIS SCRIPT IS NOW FIXED ---
+        // It tries to SWITCH first, and only ADD if the network is missing.
+        const sepoliaChainId = '0xaa36a7'; // Sepolia ChainID in hex
+
+        document.getElementById('addNetworkButton').addEventListener('click', async () => {
+            if (!window.ethereum) {
+                alert("MetaMask is not installed!");
+                return;
+            }
+
+            try {
+                // First, try to SWITCH to the network
+                await window.ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: sepoliaChainId }],
+                });
+            } catch (switchError) {
+                // This error code (4902) means the chain has not been added to MetaMask
+                if (switchError.code === 4902) {
+                    try {
+                        // If it fails, then try to ADD the network
+                        await window.ethereum.request({
+                            method: 'wallet_addEthereumChain',
+                            params: [{
+                                chainId: sepoliaChainId,
+                                chainName: 'Sepolia Testnet',
+                                nativeCurrency: {
+                                    name: 'ETH',
+                                    symbol: 'ETH',
+                                    decimals: 18
+                                },
+                                rpcUrls: ['https://sepolia.infura.io/v3/'],
+                                blockExplorerUrls: ['https://sepolia.etherscan.io']
+                            }]
+                        });
+                    } catch (addError) {
+                        console.error('Failed to add the network:', addError);
+                    }
+                } else {
+                    console.error('Failed to switch networks:', switchError);
+                }
+            }
+        });
+
+        // Add PRT Token to MetaMask
+        const tokenAddress = '0x1e9f2F91E0673E3313C68b49a2262814C7d8921e';
+        document.getElementById('addTokenButton').addEventListener('click', () => {
+            window.ethereum.request({
+                method: 'wallet_watchAsset',
+                params: {
+                    type: 'ERC20',
+                    options: {
+                        address: tokenAddress,
+                        symbol: 'PRT',
+                        decimals: 18,
+                    },
+                },
+            }).catch((error) => {
+                console.error('Failed to add the token:', error);
+            });
+        });
+
+        // Copy Token Address to Clipboard
+        const copyButton = document.getElementById('copyButton');
+        copyButton.addEventListener('click', () => {
+            navigator.clipboard.writeText(tokenAddress).then(() => {
+                copyButton.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyButton.textContent = 'Copy';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
