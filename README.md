@@ -4,6 +4,7 @@ This project is the complete solution for the "Tokenized Reward System" case stu
 
 ## 🚀 Live URLs & Contract
 
+* **Demo Video:** [https://youtu.be/BlmMYU9Angw](https://youtu.be/BlmMYU9Angw)
 * **Main DApp:** [https://phillip-reward-dapp.vercel.app/](https://phillip-reward-dapp.vercel.app/)
 * **Token Claim Page (Faucet):** [https://phillip-token-claim.vercel.app/](https://phillip-token-claim.vercel.app/)
 
