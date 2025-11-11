@@ -23,7 +23,7 @@ This repo contains three separate parts:
 
 * `/contract`: Contains the final `RewardToken.sol` smart contract.
 * `/frontend`: The main React + wagmi DApp where users can check balances and transfer tokens.
-* `/faucet`: A separate Node.js server that acts as a secure claim page to give out test tokens.
+* `/faucet`: To improve user experience, A separate Node.js server that acts as a secure claim page to give out test tokens.
 
 ---
 
